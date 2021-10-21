@@ -30,9 +30,14 @@ public class RockPaperScissors {
             int rounds = myScanner.nextInt();
             if (rounds >= MINIMUM_ROUNDS && rounds <= MAXIMUM_ROUNDS) {
                 for (int roundsCompleted = 0; roundsCompleted < rounds; roundsCompleted++) {
-
+                    int userSelection = -1;
                     System.out.println("Please enter '1' for Rock, '2' for Paper or '3' for Scissors: ");
-                    int userSelection = myScanner.nextInt();                                    // Look into allowing the user to retry input
+                    while(userSelection != ROCK && userSelection != PAPER && userSelection != SCISSORS) {
+                        userSelection = myScanner.nextInt();
+                        if (userSelection > 3 || userSelection < 1){
+                            System.out.println("Invalid input - Try again");
+                        }
+                    }
                     printOutput(USER_NAME, userSelection);
 
                     Random randNum = new Random();
@@ -58,14 +63,18 @@ public class RockPaperScissors {
                 printWinner(userWins, cpuWins);
                 System.out.println("\nWould you like to play again? (Y/N): ");
                 myScanner.nextLine(); //throw away the \n not consumed by nextInt()
-                String response = myScanner.nextLine();
-                if (response.equals("N") || response.equals("n")) {
-                    System.out.println("Thanks for playing!");
-                    playing = false;
-                }
-                else if (!response.equals("Y") && !response.equals("y")){
-                    System.out.println("Incorrect input - game has quit automatically");        // Look into allowing the user to retry input
-                    playing = false;
+                String response = "";
+                while (!response.equals("N") && !response.equals("n")) {
+                    response = myScanner.nextLine();
+                    if (response.equals("N") || response.equals("n")) {
+                        System.out.println("Thanks for playing!");
+                        playing = false;
+                    } else if (!response.equals("Y") && !response.equals("y")) {
+                        System.out.println("\nIncorrect input - Would you like to play again? (Y/N): ");
+                    }
+                    else {
+                        break;
+                    }
                 }
 
             } else {
