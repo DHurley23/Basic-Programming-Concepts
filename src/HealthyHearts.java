@@ -12,7 +12,7 @@ public class HealthyHearts {
     }
 
     private static void calculateAndPrintHeartRateStats(int age){
-        if(age > 0 || age < 120) {                                                       //checking for a valid age
+        if(age > 0 && age < 120) {                                                       //checking for a valid age
             double maxHeartRate = MAXIMUM_HEART_RATE - age;
             System.out.println("Your maximum heart rate should be: " + (int) maxHeartRate);
             double minHRZone = maxHeartRate * MINIMUM_HR_ZONE_PERCENTAGE;   //calculating the minimum heart rate zone
